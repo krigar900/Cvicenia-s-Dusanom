@@ -5,7 +5,9 @@ CREATE TABLE osoba (
   datum narodenia DATE,
   majitel BOOLEAN,
   id_dom INT,
-  FOREIGN KEY (id_dom) REFERENCES dom(id) 
+  id_rodina INT,
+  FOREIGN KEY (id_dom) REFERENCES dom(id),
+  FOREIGN KEY (id_rodina) REFERENCES rodina(id) 
 );
 
 
@@ -16,6 +18,8 @@ CREATE TABLE dom (
   mesto VARCHAR (100),
   farba VARCHAR(20),
   zahrada BOOLEAN
+  id_rodina INT,
+  FOREIGN KEY (id_rodina) REFERENCES rodina(id)
 );
 
 
@@ -28,8 +32,8 @@ CREATE TABLE izba (
   id_osoba INT,
   FOREIGN KEY (id_dom) REFERENCES dom(id),
   FOREIGN KEY (id_osoba) REFERENCES osoba(id)
-
 );
+
 
 CREATE TABLE zahrada (
   Výmer_v_m2 INT
@@ -54,9 +58,8 @@ CREATE TABLE zariadenie (
 
 
 
-
 CREATE TABLE zariadenie_izby (
-id INT,
+id SERIAL PRIMARY KEY,
 id_izba INT,
 id_zariadenie INT,
 pocet INT,
@@ -65,5 +68,12 @@ FOREIGN KEY (id_zariadenia) REFERENCES zariadenie(id)
 );
 
 
+CREATE TABLE rodina (
+  id SERIAL PRIMARY KEY,
+  meno VARCHAR(30),
+  počet členov INT,
+  id_dom INT,
+  FOREIGN KEY (id_dom) REFERENCES dom(id)
+);
 
 /*Ako sa definuje foreign key a primary key*/
