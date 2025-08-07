@@ -18,7 +18,6 @@ CREATE TABLE dom (
   mesto VARCHAR (100),
   farba VARCHAR(20),
   zahrada BOOLEAN,
-  id_rodina INT,
   );
 
 CREATE TABLE osoba (
