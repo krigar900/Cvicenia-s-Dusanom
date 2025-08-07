@@ -1,5 +1,6 @@
+package com.projekt.rodinnedomy.model;
+
 import java.time.LocalDate;
-import java.util.Date;
 
 public class osobaDTO {
     private int id;

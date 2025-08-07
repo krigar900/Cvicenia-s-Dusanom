@@ -10,6 +10,12 @@ CREATE TABLE zariadenie (
   cena DECIMAL(8,2)
 );
 
+ CREATE TABLE rodina (
+  id SERIAL PRIMARY KEY,
+  meno VARCHAR(30),
+  pocet_clenov INT
+ );
+
 
 CREATE TABLE dom (
   id SERIAL PRIMARY KEY,
@@ -18,8 +24,12 @@ CREATE TABLE dom (
   mesto VARCHAR (100),
   farba VARCHAR(20),
   zahrada BOOLEAN,
+  id_rodina INT,
+  FOREIGN KEY (id_rodina) REFERENCES rodina(id)
   );
 
+ 
+ 
 CREATE TABLE osoba (
   id SERIAL PRIMARY KEY,
   meno VARCHAR(50),
@@ -32,13 +42,7 @@ CREATE TABLE osoba (
   FOREIGN KEY (id_rodina) REFERENCES rodina(id) 
 );
 
-CREATE TABLE rodina (
-  id SERIAL PRIMARY KEY,
-  meno VARCHAR(30),
-  pocet clenov INT,
-  id_dom INT,
-  FOREIGN KEY (id_dom) REFERENCES dom(id)
-);
+
 
 CREATE TABLE izba (
   id SERIAL PRIMARY KEY,
@@ -52,8 +56,8 @@ CREATE TABLE izba (
 );
 
 CREATE TABLE zahrada (
-  id SERIAL PRIMARY KEY
-  Výmer_v_m2 INT,
+  id SERIAL PRIMARY KEY,
+  Vymer_v_m2 INT,
   druh VARCHAR(50),
   id_dom INT,
   FOREIGN KEY (id_dom) REFERENCES dom(id)

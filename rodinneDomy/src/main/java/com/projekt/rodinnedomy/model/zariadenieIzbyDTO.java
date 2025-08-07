@@ -1,3 +1,5 @@
+package com.projekt.rodinnedomy.model;
+
 public class zariadenieIzbyDTO {
     private int id;
     private int idIzba;
@@ -10,6 +12,7 @@ public class zariadenieIzbyDTO {
         this.idZariadenie = idZariadenie;
         this.pocet = pocet;
     }
+
     /*CREATE TABLE zariadenie_izby (
 id SERIAL PRIMARY KEY,
 id_izba INT,

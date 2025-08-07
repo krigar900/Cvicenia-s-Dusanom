@@ -1,4 +1,4 @@
-
+package com.projekt.rodinnedomy.model;
 
 
 public class domDTO {
@@ -9,14 +9,6 @@ public class domDTO {
     private String mesto;
     private String farba;
     private boolean zahrada;
-
-    public domDTO(int id, String ulica, int cisloDomu, String mesto, String farba, boolean zahrada, int idRodina) {
-        this.id = id;
-        this.ulica = ulica;
-        this.cisloDomu = cisloDomu;
-        this.mesto = mesto;
-        this.farba = farba;
-        this.zahrada = zahrada;
 
     }
 

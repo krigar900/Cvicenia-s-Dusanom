@@ -1,3 +1,5 @@
+package com.projekt.rodinnedomy.model;
+
 public class rodinaDTO {
 
     private int id;

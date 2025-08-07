@@ -1,3 +1,5 @@
+package com.projekt.rodinnedomy.model;
+
 public class zariadenieDTO {
     private int id;
     private String typ;

@@ -1,3 +1,5 @@
+package com.projekt.rodinnedomy.model;
+
 public class zahradaDTO {
     private int id;
     private int vymerV2;
