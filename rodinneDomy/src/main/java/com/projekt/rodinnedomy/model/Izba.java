@@ -1,6 +1,6 @@
 package com.projekt.rodinnedomy.model;
 
-public class izbaDTO {
+public class Izba {
     private int id;
     private String typ;
     private int pocetOkien;
@@ -8,7 +8,7 @@ public class izbaDTO {
     private int idDom;
     private int idOsoba;
 
-    public izbaDTO(int id, String typ, int pocetOkien, String vykurovanie, int idDom, int idOsoba) {
+    public Izba(int id, String typ, int pocetOkien, String vykurovanie, int idDom, int idOsoba) {
         this.id = id;
         this.typ = typ;
         this.pocetOkien = pocetOkien;

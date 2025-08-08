@@ -1,12 +1,12 @@
 package com.projekt.rodinnedomy.model;
 
-public class zahradaDTO {
+public class Zahrada {
     private int id;
     private int vymerV2;
     private String druh;
     private int idDom;
 
-    public zahradaDTO(int id, int vymerV2, String druh, int idDom) {
+    public Zahrada(int id, int vymerV2, String druh, int idDom) {
         this.id = id;
         this.vymerV2 = vymerV2;
         this.druh = druh;

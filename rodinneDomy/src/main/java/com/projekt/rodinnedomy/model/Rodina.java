@@ -1,13 +1,13 @@
 package com.projekt.rodinnedomy.model;
 
-public class rodinaDTO {
+public class Rodina {
 
     private int id;
     private String meno;
     private int pocetClenov;
     private int idDom;
 
-    public rodinaDTO(int id, String meno, int pocetClenov, int idDom) {
+    public Rodina(int id, String meno, int pocetClenov, int idDom) {
         this.id = id;
         this.meno = meno;
         this.pocetClenov = pocetClenov;

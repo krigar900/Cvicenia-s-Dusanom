@@ -1,7 +1,7 @@
 package com.projekt.rodinnedomy.model;
 
 
-public class domDTO {
+public class Dom {
 
     private int id;
     private String ulica;

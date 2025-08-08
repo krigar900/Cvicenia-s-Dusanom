@@ -2,7 +2,7 @@ package com.projekt.rodinnedomy.model;
 
 import java.time.LocalDate;
 
-public class osobaDTO {
+public class Osoba {
     private int id;
     private String meno;
     private String priezvisko;
@@ -11,7 +11,7 @@ public class osobaDTO {
     private int idDom;
     private int idRodina;
 
-    public osobaDTO(int id, String meno, String priezvisko, LocalDate datumNarodenia, boolean majitel, int idDom, int idRodina) {
+    public Osoba(int id, String meno, String priezvisko, LocalDate datumNarodenia, boolean majitel, int idDom, int idRodina) {
         this.id = id;
         this.meno = meno;
         this.priezvisko = priezvisko;

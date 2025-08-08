@@ -1,12 +1,12 @@
 package com.projekt.rodinnedomy.model;
 
-public class zariadenieIzbyDTO {
+public class ZariadenieIzby {
     private int id;
     private int idIzba;
     private int idZariadenie;
     private int pocet;
 
-    public zariadenieIzbyDTO(int id, int idIzba, int idZariadenie, int pocet) {
+    public ZariadenieIzby(int id, int idIzba, int idZariadenie, int pocet) {
         this.id = id;
         this.idIzba = idIzba;
         this.idZariadenie = idZariadenie;

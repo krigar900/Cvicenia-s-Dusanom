@@ -1,11 +1,11 @@
 package com.projekt.rodinnedomy.model;
 
-public class zariadenieDTO {
+public class Zariadenie {
     private int id;
     private String typ;
     private double cena;
 
-    public zariadenieDTO(int id, String typ, double cena) {
+    public Zariadenie(int id, String typ, double cena) {
         this.id = id;
         this.typ = typ;
         this.cena = cena;
