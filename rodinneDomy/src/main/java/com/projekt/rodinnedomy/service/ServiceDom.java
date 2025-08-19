@@ -29,5 +29,9 @@ public class ServiceDom {
         return daoDom.updateDom(dom);
     }
 
+    public boolean deleteDom(int id) {
+        return daoDom.deleteById(id);
+    }
+
 
 }

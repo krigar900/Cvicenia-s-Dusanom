@@ -111,6 +111,21 @@ public class DaoDom {
         return 0;
     }
 
+    public boolean deleteById(int id) {
+        String sql = "DELETE FROM dom WHERE id = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+
+            return rowsAffected > 0; // true ak sa niečo vymazalo
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 }
 

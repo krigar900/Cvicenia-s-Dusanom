@@ -35,6 +35,7 @@ public class DomController {
         if (domy.iterator().hasNext()) {
             return ResponseEntity.ok(domy);
         }
+        return ResponseEntity.noContent().build();
     }
     
     @PostMapping
@@ -61,6 +62,18 @@ public class DomController {
             return ResponseEntity.ok("Dom bol úspešne aktualizovaný");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dom s daným ID neexistuje");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteDom(@PathVariable int id) {
+        boolean deleted = serviceDom.deleteDom(id);
+
+        if (deleted) {
+            return ResponseEntity.ok("Dom s ID " + id + " bol vymazaný.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Dom s ID " + id + " sa nenašiel.");
         }
     }
    }
