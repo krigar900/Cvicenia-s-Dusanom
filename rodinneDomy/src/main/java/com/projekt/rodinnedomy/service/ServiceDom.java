@@ -1,5 +1,6 @@
 package com.projekt.rodinnedomy.service;
 
+import com.projekt.rodinnedomy.dao.DaoDemo;
 import com.projekt.rodinnedomy.dao.DaoDom;
 import com.projekt.rodinnedomy.model.Dom;
 import org.springframework.stereotype.Service;
@@ -9,9 +10,11 @@ import java.util.List;
 @Service
 public class ServiceDom {
     private final DaoDom daoDom;
+    private final DaoDemo daoDemo;
 
-    public ServiceDom(DaoDom daoDom) {
+    public ServiceDom(DaoDom daoDom, DaoDemo daoDemo) {
         this.daoDom = daoDom;
+        this.daoDemo = daoDemo;
     }
 
     public List<Dom> findAll() {
@@ -20,7 +23,11 @@ public class ServiceDom {
 
     public Dom getDomById(int id) {return daoDom.findById(id);}
 
-    public int createDom(Dom dom) {return daoDom.createDom(dom);}
+    public Dom createDom(Dom dom) {
+        Integer id = daoDemo.createDom(dom);
+        dom.setId( id);
+        return dom;
+    }
 
     public int updateDom(Dom dom) {
         if (dom.getId() == 0) {

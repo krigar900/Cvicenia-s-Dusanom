@@ -1,6 +1,7 @@
 package com.projekt.rodinnedomy.dao;
 
 import com.projekt.rodinnedomy.model.Dom;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -10,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -72,23 +74,11 @@ public class DaoDom {
         return dom;
     }
 
-    public int createDom(Dom dom) {
-        String sql = "INSERT INTO dom (ulica, cislo_domu, mesto, farba, zahrada) VALUES (?, ?, ?, ?, ?)"; //Vytvorenie sql dotazu
+    public Dom createDom(Dom dom) {
+        String sql = "INSERT INTO dom (ulica, cislo_domu, mesto, farba, zahrada) VALUES (?, ?, ?, ?, ?) RETURNING id"; //Vytvorenie sql dotazu
+        //TODO Dusan: tu dopln db volanie aby vratilo dom
+        return new Dom();
 
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql))  {
-
-                stmt.setString(1, dom.getUlica());
-                stmt.setInt(2, dom.getCisloDomu());
-                stmt.setString(3, dom.getMesto());
-                stmt.setString(4, dom.getFarba());
-                stmt.setBoolean(5, dom.isZahrada());
-                return stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
     }
 
     public int updateDom(Dom dom) {
