@@ -4,6 +4,8 @@ import com.projekt.rodinnedomy.service.ServiceDom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController //hovori springu ze toto ej kontroler a vracia JSON
 @RequestMapping("api/Dom") // základna URL cesat pre Cotroller
@@ -22,10 +24,19 @@ public class DomController {
         return serviceDom.getDomById(id);
     }
 
+    @GetMapping("/all")
+    public List<Dom> findAll() {
+        return serviceDom.findAll();
+    }
+
     @PostMapping
-    public Dom create(@RequestBody Dom dom) {
+    public int create(@RequestBody Dom dom) {
         return serviceDom.createDom(dom);
     }
 
+    @PutMapping("/{id}")
+    public int update(@RequestBody Dom dom) {
+       return serviceDom.updateDom(dom);
+    }
 
 }

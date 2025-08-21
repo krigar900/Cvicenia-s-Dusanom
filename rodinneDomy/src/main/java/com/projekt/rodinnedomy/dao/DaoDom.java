@@ -1,10 +1,13 @@
 package com.projekt.rodinnedomy.dao;
 
+import com.projekt.rodinnedomy.dao.mapper.DomMapper;
 import com.projekt.rodinnedomy.model.Dom;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 //Komunikuje s databazou
 
@@ -20,42 +23,53 @@ public class DaoDom {
     public Dom findById(int id) { //prijma id a vráti objekt Dom ak existuje
         String sql = "SELECT * FROM dom where id = ?";
         try {
-            return jdbcTemplate.queryForObject(sql, (RowMapper<Dom>)(resultSet, i) -> { // Metóda JdbcTemplate, ktorá očakáva presne jeden výsledok
-                Dom dom = new Dom();
-                dom.setId(resultSet.getInt("id"));
-                dom.setUlica(resultSet.getString("ulica"));
-                dom.setCisloDomu(resultSet.getInt("cislo_domu"));
-                dom.setMesto(resultSet.getString("mesto"));
-                dom.setFarba(resultSet.getString("farba"));
-                dom.setZahrada(resultSet.getBoolean("zahrada"));
-                return dom;
-            },id); //dosadeny parameter id
+            return jdbcTemplate.queryForObject(sql, new DomMapper(), id);
         } catch (EmptyResultDataAccessException e) {
             throw new RuntimeException("Nenašiel sa záznma s ID " + id);}
 
 
     }
 
-    public Dom create(Dom dom) {
-        String sql = "INSERT INTO dom (ulica, cislo_domu, mesto, farba, zahrada) VALUES (?, ?, ?, ?, ?) RETURNING "; //po vložení vráti celý riadok vrátane id domu
+    public List<Dom> findAll() {
+        String sql = "SELECT * FROM dom";
         try {
-            return jdbcTemplate.queryForObject(sql, (RowMapper<Dom>) (resultSet, i) -> {
-                Dom domN = new Dom();
-                domN.setUlica(resultSet.getString("ulica"));
-                domN.setCisloDomu(resultSet.getInt("cislo_domu"));
-                domN.setMesto(resultSet.getString("mesto"));
-                domN.setFarba(resultSet.getString("farba"));
-                domN.setZahrada(resultSet.getBoolean("zahrada"));
-                return domN;
-            },dom.getUlica(), dom.getCisloDomu(), dom.getMesto(), dom.getFarba(), dom.isZahrada());
+            return jdbcTemplate.query(sql, new DomMapper());
+        }catch (EmptyResultDataAccessException e) {
+            throw new RuntimeException("Nenašli sa žiadne záznamy");
+        }
+    }
+
+    public int create(Dom dom) {
+        String sql = "INSERT INTO dom (ulica, cislo_domu, mesto, farba, zahrada) VALUES (?, ?, ?, ?, ?) RETURNING id "; //po vložení vráti celý riadok vrátane id domu
+        try {
+            return jdbcTemplate.update(
+                    sql,
+                    Integer.class,
+                    dom.getUlica(),
+                    dom.getCisloDomu(),
+                    dom.getMesto(),
+                    dom.getFarba(),
+                    dom.isZahrada()
+            );
         } catch (EmptyResultDataAccessException e) {
             throw new RuntimeException("Nepodarilo sa vytvoriť dom", e);}
     }
 
 
-
-
-
-
-
+    public int update(Dom dom) {
+        String sql = "UPDATE dom SET ulica = ?, cislo_domu = ?, mesto = ?, farba = ?, zahrada = ? WHERE id = ?";
+        try {
+            return jdbcTemplate.update(
+                    sql,
+                    dom.getUlica(),
+                    dom.getCisloDomu(),
+                    dom.getMesto(),
+                    dom.getFarba(),
+                    dom.isZahrada(),
+                    dom.getId()
+            );
+        } catch (Exception e) {
+            throw new RuntimeException("Chyba pri aktualizácii domu s ID " + dom.getId(), e);
+        }
+    }
 }
