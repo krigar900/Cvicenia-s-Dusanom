@@ -15,6 +15,7 @@ import java.util.List;
 public class DaoDom {
 
     private final JdbcTemplate jdbcTemplate;
+    private final RowMapper<Integer> idRowMapper = (rs, rowNum) -> rs.getInt("id");
 
     public DaoDom(JdbcTemplate jdbctemplate) {
         this.jdbcTemplate = jdbctemplate;
@@ -40,19 +41,21 @@ public class DaoDom {
     }
 
     public int create(Dom dom) {
-        String sql = "INSERT INTO dom (ulica, cislo_domu, mesto, farba, zahrada) VALUES (?, ?, ?, ?, ?) RETURNING id "; //po vložení vráti celý riadok vrátane id domu
+        String sql = "INSERT INTO dom (ulica, cislo_domu, mesto, farba, zahrada) VALUES (?, ?, ?, ?, ?) RETURNING id";
         try {
-            return jdbcTemplate.update(
+            // Správne použitie idRowMapper
+            return jdbcTemplate.queryForObject(
                     sql,
-                    Integer.class,
+                    this.idRowMapper,
                     dom.getUlica(),
                     dom.getCisloDomu(),
                     dom.getMesto(),
                     dom.getFarba(),
                     dom.isZahrada()
             );
-        } catch (EmptyResultDataAccessException e) {
-            throw new RuntimeException("Nepodarilo sa vytvoriť dom", e);}
+        } catch (Exception e) {
+            throw new RuntimeException("Nepodarilo sa vytvoriť dom", e);
+        }
     }
 
 
