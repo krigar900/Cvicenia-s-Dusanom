@@ -24,12 +24,16 @@ public class DomMapper implements RowMapper<Dom> {
         return dom;
     }
 
+    //Opačný mapper
     public Map<String, Object> toMap( Dom dom) {
         Map<String, Object> parameters = new HashMap<>();
 
         parameters.put("id", dom.getId());
         parameters.put("ulica",dom.getUlica());
         parameters.put("cisloDomu",dom.getCisloDomu());
+        parameters.put("mesto",dom.getMesto());
+        parameters.put("farba",dom.getFarba());
+        parameters.put("zahrada",dom.isZahrada());
         return parameters;
     }
 }

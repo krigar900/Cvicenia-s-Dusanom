@@ -72,4 +72,26 @@ public class DaoDom {
             throw new RuntimeException("Chyba pri aktualizácii domu s ID " + dom.getId(), e);
         }
     }
+
+
+    public int delete(int id) {
+        String sql = "DELETE FROM dom WHERE id = ?";
+        try {
+            return jdbcTemplate.update(sql, id);
+        }catch (EmptyResultDataAccessException e) {
+            throw new RuntimeException("Nepodarilo sa vymazat dom s ID " + id, e);
+        }
+    }
+
+    //Vyhľadávanie podľa ľubovońého parametra
+    public List<Dom> findBy(String parameter, String value) {
+        String sql = "SELECT * FROM dom WHERE " + parameter + " = ?";
+        try {
+            return jdbcTemplate.query(sql, new DomMapper(), value);
+        } catch (EmptyResultDataAccessException e) {
+            throw new RuntimeException("Nenašli sa dáta.", e);
+        }
+    }
+
+
 }

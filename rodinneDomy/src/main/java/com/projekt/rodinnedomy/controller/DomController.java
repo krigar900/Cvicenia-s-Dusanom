@@ -29,6 +29,8 @@ public class DomController {
         return serviceDom.findAll();
     }
 
+    //vyhladavanie podla parametra
+
     @PostMapping
     public int create(@RequestBody Dom dom) {
         return serviceDom.createDom(dom);
@@ -39,4 +41,15 @@ public class DomController {
        return serviceDom.updateDom(dom);
     }
 
+    @DeleteMapping("/{id}")
+    public int delete(@PathVariable int id) {
+        return serviceDom.deleteDom(id);
+    }
+
+    @GetMapping("/vyhľadaj")
+    public List<Dom> findByParameter(@RequestParam String parameter, @RequestParam String value) {
+        return serviceDom.findByParameter(parameter, value);
+    }
 }
+
+

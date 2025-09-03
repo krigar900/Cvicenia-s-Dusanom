@@ -40,5 +40,18 @@ public class ServiceDom {
         return daoDom.findAll();
     }
 
+    public int deleteDom(int id) {
+        int rows = daoDom.delete(id);
+
+        if(id <= 0 ) {
+            throw new RuntimeException("Dom s id " + " sa nepodarilo vymazat.");
+        }
+        return rows;
+    }
+
+    public List<Dom> findByParameter(String parameter, String value) {
+        return daoDom.findBy(parameter, value);
+    }
+
 
 }
